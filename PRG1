@@ -1,0 +1,51 @@
+SQL> CREATE TABLE STUDENTS(rollno INT,name VARCHAR(20),course varchar(20),year number(4));
+
+Table created.
+
+SQL> ALTER TABLE STUDENTS ADD email varchar(30);
+
+Table altered.
+
+SQL> DES STUDENTS;
+SP2-0734: unknown command beginning "DES STUDEN..." - rest of line ignored.
+SQL> DESC STUDENTS
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ COURSE                                             VARCHAR2(20)
+ YEAR                                               NUMBER(4)
+ EMAIL                                              VARCHAR2(30)
+
+SQL> ALTER TABLE STUDENTS DROP COLUMN year;
+
+Table altered.
+
+SQL> DESC STUDENTS
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ COURSE                                             VARCHAR2(20)
+ EMAIL                                              VARCHAR2(30)
+
+SQL> ALTER TABLE STUDENTS MODIFY email varchar(50);
+
+Table altered.
+
+SQL> DESC STUDENTS
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ COURSE                                             VARCHAR2(20)
+ EMAIL                                              VARCHAR2(50)
+
+SQL> DROP TABLE STUDENTS;
+
+Table dropped.
+
+
+SQL> TRUNCATE TABLE STUDENT;
+
+Table truncated.
