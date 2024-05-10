@@ -1,0 +1,329 @@
+SQL> create table customer(id int primary key,name varchar(20),address varchar(50),city varchar(20),country varchar(20),age number(2),salary number(6));
+
+Table created.
+
+SQL> desc customer
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ ADDRESS                                            VARCHAR2(50)
+ CITY                                               VARCHAR2(20)
+ COUNTRY                                            VARCHAR2(20)
+ AGE                                                NUMBER(2)
+ SALARY                                             NUMBER(6)
+
+SQL> insert into customer values(&id,'&name','&address','&city','&country',&age,&salary);
+Enter value for id: 101
+Enter value for name: Priya
+Enter value for address: Alunkalpadam
+Enter value for city: Varappetty
+Enter value for country: India
+Enter value for age: 48
+Enter value for salary: 25000
+old   1: insert into customer values(&id,'&name','&address','&city','&country',&age,&salary)
+new   1: insert into customer values(101,'Priya','Alunkalpadam','Varappetty','India',48,25000)
+
+1 row created.
+
+SQL> /
+Enter value for id: 102
+Enter value for name: Nayana
+Enter value for address: Lakshmibhavan
+Enter value for city: Ankamali
+Enter value for country: India
+Enter value for age: 35
+Enter value for salary: 15000
+old   1: insert into customer values(&id,'&name','&address','&city','&country',&age,&salary)
+new   1: insert into customer values(102,'Nayana','Lakshmibhavan','Ankamali','India',35,15000)
+
+1 row created.
+
+SQL> /
+Enter value for id: 103
+Enter value for name: Ashwanth
+Enter value for address: Bekod
+Enter value for city: berlin
+Enter value for country: germany
+Enter value for age: 28
+Enter value for salary: 12500
+old   1: insert into customer values(&id,'&name','&address','&city','&country',&age,&salary)
+new   1: insert into customer values(103,'Ashwanth','Bekod','berlin','germany',28,12500)
+
+1 row created.
+
+SQL> /
+Enter value for id: 104
+Enter value for name: Rahul
+Enter value for address: Kinderineel
+Enter value for city: Nasik
+Enter value for country: India
+Enter value for age: 25
+Enter value for salary: 32500
+old   1: insert into customer values(&id,'&name','&address','&city','&country',&age,&salary)
+new   1: insert into customer values(104,'Rahul','Kinderineel','Nasik','India',25,32500)
+
+1 row created.
+
+SQL> /
+Enter value for id: 105
+Enter value for name: Saran
+Enter value for address: loveshore
+Enter value for city: banglore
+Enter value for country: india
+Enter value for age: 29
+Enter value for salary: 12570
+old   1: insert into customer values(&id,'&name','&address','&city','&country',&age,&salary)
+new   1: insert into customer values(105,'Saran','loveshore','banglore','india',29,12570)
+
+1 row created.
+
+SQL> select * from customer;
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       101 Priya
+Alunkalpadam                                       Varappetty
+India                        48      25000
+
+       102 Nayana
+Lakshmibhavan                                      Ankamali
+India                        35      15000
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+
+       103 Ashwanth
+Bekod                                              berlin
+germany                      28      12500
+
+       104 Rahul
+Kinderineel                                        Nasik
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+India                        25      32500
+
+       105 Saran
+loveshore                                          banglore
+india                        29      12570
+
+SQL> SELECT * FROM customer WHERE name LIKE 'P%';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       101 Priya
+Alunkalpadam                                       Varappetty
+India                        48      25000
+
+
+SQL> SELECT * FROM customer WHERE name LIKE '%ya%';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       101 Priya
+Alunkalpadam                                       Varappetty
+India                        48      25000
+
+       102 Nayana
+Lakshmibhavan                                      Ankamali
+India                        35      15000
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+
+
+SQL> select * from customer where city like '%i';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       102 Nayana
+Lakshmibhavan                                      Ankamali
+India                        35      15000
+
+
+SQL> select * from customer where age like '2%';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       103 Ashwanth
+Bekod                                              berlin
+germany                      28      12500
+
+       104 Rahul
+Kinderineel                                        Nasik
+India                        25      32500
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+
+       105 Saran
+loveshore                                          banglore
+india                        29      12570
+
+
+
+
+SQL> select * from customer where salary like '%50%';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       101 Priya
+Alunkalpadam                                       Varappetty
+India                        48      25000
+
+       102 Nayana
+Lakshmibhavan                                      Ankamali
+India                        35      15000
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+
+       103 Ashwanth
+Bekod                                              berlin
+germany                      28      12500
+
+       104 Rahul
+Kinderineel                                        Nasik
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+India                        25      32500
+
+
+SQL> select * from customer where city like 'Na_ik';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       104 Rahul
+Kinderineel                                        Nasik
+India                        25      32500
+
+
+SQL> SELECT * FROM CUSTOMER WHERE salary LIKE '3__00';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       104 Rahul
+Kinderineel                                        Nasik
+India                        25      32500
+
+
+SQL> select * from customer where name like '____a%';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       101 Priya
+Alunkalpadam                                       Varappetty
+India                        48      25000
+
+       103 Ashwanth
+Bekod                                              berlin
+germany                      28      12500
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+
+
+SQL> select * from customer where name NOT LIKE 'Priya';
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+       102 Nayana
+Lakshmibhavan                                      Ankamali
+India                        35      15000
+
+       103 Ashwanth
+Bekod                                              berlin
+germany                      28      12500
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+
+       104 Rahul
+Kinderineel                                        Nasik
+India                        25      32500
+
+       105 Saran
+loveshore                                          banglore
+
+        ID NAME
+---------- --------------------
+ADDRESS                                            CITY
+-------------------------------------------------- --------------------
+COUNTRY                     AGE     SALARY
+-------------------- ---------- ----------
+india                        29      12570
+
