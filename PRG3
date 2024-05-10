@@ -1,0 +1,228 @@
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Mon Feb 12 15:59:13 2024
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> create table Department(deptid int primary key,deptname varchar(20),city varchar(20));
+
+Table created.
+
+SQL> desc Department
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTID                                    NOT NULL NUMBER(38)
+ DEPTNAME                                           VARCHAR2(20)
+ CITY                                               VARCHAR2(20)
+
+SQL> create table Employee1(empid int primary key,name varchar(20),salary number(10),deptid int,FOREIGN KEY(deptid) REFERENCES Department(deptid));
+
+Table created.
+
+SQL> desc Employee1
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                     NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ SALARY                                             NUMBER(10)
+ DEPTID                                             NUMBER(38)
+
+SQL> insert into Department values(&deptid,'&deptname','&city');
+Enter value for deptid: 101
+Enter value for deptname: Marketing
+Enter value for city: Kochi
+old   1: insert into Department values(&deptid,'&deptname','&city')
+new   1: insert into Department values(101,'Marketing','Kochi')
+
+1 row created.
+
+SQL> /
+Enter value for deptid: 102
+Enter value for deptname: Advertising
+Enter value for city: Banglore
+old   1: insert into Department values(&deptid,'&deptname','&city')
+new   1: insert into Department values(102,'Advertising','Banglore')
+
+1 row created.
+
+SQL> /
+Enter value for deptid: 103
+Enter value for deptname: HR
+Enter value for city: Banglore
+old   1: insert into Department values(&deptid,'&deptname','&city')
+new   1: insert into Department values(103,'HR','Banglore')
+
+1 row created.
+
+SQL> /
+Enter value for deptid: 104
+Enter value for deptname: Advertising
+Enter value for city: Kochi
+old   1: insert into Department values(&deptid,'&deptname','&city')
+new   1: insert into Department values(104,'Advertising','Kochi')
+
+1 row created.
+
+SQL> /
+Enter value for deptid: 105
+Enter value for deptname: Sales
+Enter value for city: Mumbai
+old   1: insert into Department values(&deptid,'&deptname','&city')
+new   1: insert into Department values(105,'Sales','Mumbai')
+
+1 row created.
+
+SQL> insert into Employee1 values(&empid,'&name',&salary,&deptid);
+Enter value for empid: 1
+Enter value for name: Rakesh
+Enter value for salary: 15000
+Enter value for deptid: 105
+old   1: insert into Employee1 values(&empid,'&name',&salary,&deptid)
+new   1: insert into Employee1 values(1,'Rakesh',15000,105)
+
+1 row created.
+
+SQL> /
+Enter value for empid: 2
+Enter value for name: Sheela
+Enter value for salary: 10000
+Enter value for deptid: 103
+old   1: insert into Employee1 values(&empid,'&name',&salary,&deptid)
+new   1: insert into Employee1 values(2,'Sheela',10000,103)
+
+1 row created.
+
+SQL> /
+Enter value for empid: 3
+Enter value for name: Mythri
+Enter value for salary: 25000
+Enter value for deptid: 102
+old   1: insert into Employee1 values(&empid,'&name',&salary,&deptid)
+new   1: insert into Employee1 values(3,'Mythri',25000,102)
+
+1 row created.
+
+SQL> /
+Enter value for empid: 4
+Enter value for name: Akhila
+Enter value for salary: 18000
+Enter value for deptid: 102
+old   1: insert into Employee1 values(&empid,'&name',&salary,&deptid)
+new   1: insert into Employee1 values(4,'Akhila',18000,102)
+
+1 row created.
+
+SQL> /
+Enter value for empid: 5
+Enter value for name: Rishi
+Enter value for salary: 20000
+Enter value for deptid: 101
+old   1: insert into Employee1 values(&empid,'&name',&salary,&deptid)
+new   1: insert into Employee1 values(5,'Rishi',20000,101)
+
+1 row created.
+
+SQL> select * from Department;
+
+    DEPTID DEPTNAME             CITY
+---------- -------------------- --------------------
+       101 Marketing            Kochi
+       102 Advertising          Banglore
+       103 HR                   Banglore
+       104 Advertising          Kochi
+       105 Sales                Mumbai
+
+SQL> select * from Employee1;
+
+     EMPID NAME                     SALARY     DEPTID
+---------- -------------------- ---------- ----------
+         1 Rakesh                    15000        105
+         2 Sheela                    10000        103
+         3 Mythri                    25000        102
+         4 Akhila                    18000        102
+         5 Rishi                     20000        101
+
+SQL> update Department set deptname='Mumbai' where deptid=102;
+
+1 row updated.
+
+SQL> select * from Department where deptid=102;
+
+    DEPTID DEPTNAME             CITY
+---------- -------------------- --------------------
+       102 Mumbai               Banglore
+
+SQL> update Department set deptname='Marketing' where deptid=102;
+
+1 row updated.
+
+SQL> select * from Department where deptid=102;
+
+    DEPTID DEPTNAME             CITY
+---------- -------------------- --------------------
+       102 Marketing            Banglore
+
+SQL> delete from Employee1 where empid=5;
+
+1 row deleted.
+
+SQL> select * from Employee1;
+
+     EMPID NAME                     SALARY     DEPTID
+---------- -------------------- ---------- ----------
+         1 Rakesh                    15000        105
+         2 Sheela                    10000        103
+         3 Mythri                    25000        102
+         4 Akhila                    18000        102
+
+SQL> select name,deptname from Employee1,Department where Employee1.deptid=Department.deptid;
+
+NAME                 DEPTNAME
+-------------------- --------------------
+Akhila               Marketing
+Mythri               Marketing
+Sheela               HR
+Rakesh               Sales
+
+SQL> select name from Employee1,Department where city='Banglore' and Employee1.deptid=Department.deptid;
+
+NAME
+--------------------
+Sheela
+Mythri
+Akhila
+
+SQL> delete from Employee1 where name='Akhila';
+
+1 row deleted.
+
+SQL> select * from Employee1;
+
+     EMPID NAME                     SALARY     DEPTID
+---------- -------------------- ---------- ----------
+         1 Rakesh                    15000        105
+         2 Sheela                    10000        103
+         3 Mythri                    25000        102
+
+SQL> update Employee1 set salary=salary+500 where deptid=105;
+
+1 row updated.
+
+SQL> select * from Employee1;
+
+     EMPID NAME                     SALARY     DEPTID
+---------- -------------------- ---------- ----------
+         1 Rakesh                    15500        105
+         2 Sheela                    10000        103
+         3 Mythri                    25000        102
+
+SQL> select name,deptname from Employee1,Department where salary>10000 and Employee1.deptid=Department.deptid;
+
+NAME                 DEPTNAME
+-------------------- --------------------
+Mythri               Marketing
+Rakesh               Sales
+
+SQL>
