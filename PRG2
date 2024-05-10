@@ -1,0 +1,235 @@
+SQL> CREATE TABLE EMPLOYEE(empid int,name varchar(2),dept varchar(20),salary number(5),city varchar(20));
+
+Table created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city');
+Enter value for empid: 1
+Enter value for name: Ramesh
+Enter value for dept: advertising
+Enter value for salary: 5000
+Enter value for city: delhi
+old   1: INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city')
+new   1: INSERT INTO EMPLOYEE VALUES(1,'Ramesh','advertising',5000,'delhi')
+INSERT INTO EMPLOYEE VALUES(1,'Ramesh','advertising',5000,'delhi')
+                              *
+ERROR at line 1:
+ORA-12899: value too large for column "SYSTEM"."EMPLOYEE"."NAME" (actual: 6,
+maximum: 2)
+
+
+SQL> ALTER TABLE EMPLOYEE MODIFY name varchar(20);
+
+Table altered.
+
+SQL> INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city');
+Enter value for empid: 1
+Enter value for name: Ramesh
+Enter value for dept: advertising
+Enter value for salary: 15000
+Enter value for city: delhi
+old   1: INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city')
+new   1: INSERT INTO EMPLOYEE VALUES(1,'Ramesh','advertising',15000,'delhi')
+
+1 row created.
+
+SQL> /
+Enter value for empid: 2
+Enter value for name: Soumya
+Enter value for dept: sales
+Enter value for salary: 7000
+Enter value for city: mumbai
+old   1: INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city')
+new   1: INSERT INTO EMPLOYEE VALUES(2,'Soumya','sales',7000,'mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for empid: 3
+Enter value for name: Abhilash
+Enter value for dept: marketing
+Enter value for salary: 12000
+Enter value for city: delhi
+old   1: INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city')
+new   1: INSERT INTO EMPLOYEE VALUES(3,'Abhilash','marketing',12000,'delhi')
+
+1 row created.
+
+SQL> /
+Enter value for empid: 4
+Enter value for name: Kamal
+Enter value for dept: sales
+Enter value for salary: 8000
+Enter value for city: mumbai
+old   1: INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city')
+new   1: INSERT INTO EMPLOYEE VALUES(4,'Kamal','sales',8000,'mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for empid: 5
+Enter value for name: Arathi
+Enter value for dept: HR
+Enter value for salary: 8000
+Enter value for city: kolkata
+old   1: INSERT INTO EMPLOYEE VALUES(&empid,'&name','&dept',&salary,'&city')
+new   1: INSERT INTO EMPLOYEE VALUES(5,'Arathi','HR',8000,'kolkata')
+
+1 row created.
+
+SQL> DESC EMPLOYEE
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT                                               VARCHAR2(20)
+ SALARY                                             NUMBER(5)
+ CITY                                               VARCHAR2(20)
+
+SQL> SELECT * FROM EMPLOYEE;
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         1 Ramesh               advertising               15000
+delhi
+
+         2 Soumya               sales                      7000
+mumbai
+
+         3 Abhilash             marketing                 12000
+delhi
+
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         4 Kamal                sales                      8000
+mumbai
+
+         5 Arathi               HR                         8000
+kolkata
+
+
+SQL> SELECT * FROM EMPLOYEE WHERE EMPID=1;
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         1 Ramesh               advertising               15000
+delhi
+
+
+SQL> SELECT name from EMPLOYEE WHERE SALARY BETWEEN 7000 AND 9000;
+
+NAME
+--------------------
+Soumya
+Kamal
+Arathi
+
+SQL> SELECT name,dept,salary from EMPLOYEE WHERE SALARY BETWEEN 7000 AND 9000;
+
+NAME                 DEPT                     SALARY
+-------------------- -------------------- ----------
+Soumya               sales                      7000
+Kamal                sales                      8000
+Arathi               HR                         8000
+
+SQL> SELECT * FROM EMPLOYEE WHERE DEPT='sales';
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         2 Soumya               sales                      7000
+mumbai
+
+         4 Kamal                sales                      8000
+mumbai
+
+
+SQL> select * from employee order by name;
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         3 Abhilash             marketing                 12000
+delhi
+
+         5 Arathi               HR                         8000
+kolkata
+
+         4 Kamal                sales                      8000
+mumbai
+
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         1 Ramesh               advertising               15000
+delhi
+
+         2 Soumya               sales                      7000
+mumbai
+
+
+SQL>update employee set salary=250;
+
+5 rows updated.
+
+SQL> select * from employee;
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         1 ramesh               advertising                 250
+delhi
+
+         2 soumya               sales                       250
+mumbai
+
+         3 abhilash             marketing                   250
+delhi
+
+
+     EMPID NAME                 DEPT                     SALARY
+---------- -------------------- -------------------- ----------
+CITY
+--------------------
+         4 kamal                sales                       250
+mumbai
+
+         5 arathi               hr                          250
+kolkata
+
+
+SQL> alter table employee add join_date date;
+
+Table altered.
+
+SQL> desc employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT                                               VARCHAR2(20)
+ SALARY                                             NUMBER(5)
+ CITY                                               VARCHAR2(20)
+ JOIN_DATE                                          DATE
+
+
+
+
+
+
+
+
+
+
+
